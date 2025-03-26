@@ -3,7 +3,7 @@ name: CI/CD for Product Service
 on:
   push:
     branches:
-      - master
+      - master # branch to trigger the pipeline
     paths:
       - "*/**"
 
