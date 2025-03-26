@@ -1,0 +1,15 @@
+name: CI/CD for Product Service
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "*/**"
+
+jobs:
+  deploy:
+    uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yml@main
+    with:
+      service_name: "product-service" # Pass the service name dynamically
+      aggregator_service: false # Pass true for aggregator service-specific logic
