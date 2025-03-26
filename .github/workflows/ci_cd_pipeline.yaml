@@ -10,6 +10,7 @@ on:
 jobs:
   deploy:
     uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yml@main
+
     with:
-      service_name: "product-service" # Pass the service name dynamically
+      service_name: "product-service" # Name of the service
       aggregator_service: false # Pass true for aggregator service-specific logic
