@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-service-blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product-service
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: product-service
+        version: blue
+    spec:
+      containers:
+        - name: product-service
+          image: GCP_REGION-docker.pkg.dev/GCP_PROJECT_ID/moon-insurance/product-service:latest
+          ports:
+            - containerPort: 5002
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: product-service-db-secret
+                  key: DATABASE_URL
+
+            - name: GCP_PROJECT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-secret
+                  key: GCP_PROJECT_ID
+
+            - name: GCP_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: gcp-secret
+                  key: GCP_REGION
