@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI', 'sqlite:///products.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)  # Initialize Migrations
@@ -27,7 +27,7 @@ def create_tables():
     db.create_all()
 
 # CREATE
-@app.route('/products', methods=['POST'])
+@app.route('/', methods=['POST'])
 def create_product():
     data = request.json
     if not data or 'product_id' not in data:
@@ -38,7 +38,7 @@ def create_product():
     return jsonify(product.as_dict()), 201
 
 # READ
-@app.route('/products/<product_id>', methods=['GET'])
+@app.route('/<product_id>', methods=['GET'])
 def get_product(product_id):
     product = Product.query.filter_by(product_id=product_id).first()
     if not product:
@@ -46,7 +46,7 @@ def get_product(product_id):
     return jsonify(product.as_dict())
 
 # UPDATE
-@app.route('/products/<product_id>', methods=['PUT'])
+@app.route('/<product_id>', methods=['PUT'])
 def update_product(product_id):
     data = request.json
     product = Product.query.filter_by(product_id=product_id).first()
@@ -58,7 +58,7 @@ def update_product(product_id):
     return jsonify(product.as_dict())
 
 # DELETE
-@app.route('/products/<product_id>', methods=['DELETE'])
+@app.route('/<product_id>', methods=['DELETE'])
 def delete_product(product_id):
     product = Product.query.filter_by(product_id=product_id).first()
     if not product:
