@@ -13,4 +13,12 @@ jobs:
     with:
       service_name: "product-service" # Service name
       aggregator_service: false # Aggregator service flag
-
+    secrets:
+      GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }} # Ensure this is passed
+      GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+      GKE_CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
+      GKE_REGION: ${{ secrets.GKE_REGION }}
+      DATABASE_USER: ${{ secrets.DATABASE_USER }}
+      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
+      DATABASE_ENDPOINT: ${{ secrets.DATABASE_ENDPOINT }}
+      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
