@@ -8,9 +8,19 @@ on:
       - "*/**" # path to trigger the pipeline
 
 jobs:
-  deploy:
-    uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yml@main
+  call-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
-    with:
-      service_name: "product-service" # Name of the service
-      aggregator_service: false # Pass true for aggregator service-specific logic
+      - name: Set up Authentication with PAT
+        run: |
+          echo "${{ secrets.REUSABLE_WORKFLOW_TOKEN }}" > /tmp/token
+          git config --global credential.helper "store --file=/tmp/token"
+
+      - name: Trigger Reusable Workflow from Another Repo
+        uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yml@main
+        with:
+          service_name: "product-service"
+          aggregator_service: false # Aggregator service flag
