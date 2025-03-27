@@ -14,9 +14,10 @@ spec:
         app: product-service
         version: green
     spec:
+      serviceAccountName: moon-insurance # Use the KSA you created
       containers:
         - name: product-service
-          image: GCP_REGION-docker.pkg.dev/GCP_PROJECT_ID/moon-insurance/product-service:latest
+          image: us-central1-docker.pkg.dev/moon-insurance/moon-insurance/product-service:latest
           ports:
             - containerPort: 5002
           resources:
@@ -32,15 +33,3 @@ spec:
                 secretKeyRef:
                   name: product-service-db-secret
                   key: DATABASE_URL
-
-            - name: GCP_PROJECT_ID
-              valueFrom:
-                secretKeyRef:
-                  name: gcp-secret
-                  key: GCP_PROJECT_ID
-
-            - name: GCP_REGION
-              valueFrom:
-                secretKeyRef:
-                  name: gcp-secret
-                  key: GCP_REGION
