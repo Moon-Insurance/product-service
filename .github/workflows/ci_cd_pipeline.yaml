@@ -9,15 +9,9 @@ on:
 
 jobs:
   call-pipeline:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Trigger Reusable Workflow from Another Repo
-        uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yml@main
-        with:
-          service_name: "product-service"
-          aggregator_service: false # Aggregator service flag
-        secrets:
-          REUSABLE_WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # Pass the PAT
+    uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yml@main
+    with:
+      service_name: "product-service"
+      aggregator_service: false # Aggregator service flag
+    secrets:
+      REUSABLE_WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # Pass the PAT
