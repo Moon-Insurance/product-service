@@ -14,4 +14,4 @@ jobs:
       service_name: "product-service"
       aggregator_service: false # Aggregator service flag
     secrets:
-      GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # GitHub token
+      GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
