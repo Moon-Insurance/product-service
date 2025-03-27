@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 
 from dotenv import load_dotenv
 
+#load env
 load_dotenv()
 
 app = Flask(__name__)
