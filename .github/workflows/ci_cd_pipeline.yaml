@@ -5,7 +5,7 @@ on:
     branches:
       - master # branch to trigger the pipeline
     paths:
-      - "*/**" # path to trigger the pipeline
+      - "**" # path to trigger the pipeline
 
 jobs:
   call-pipeline:
