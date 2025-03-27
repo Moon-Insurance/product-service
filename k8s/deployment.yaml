@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: product-service
+spec:
+  replicas: 1
+  strategy:
+    blueGreen:
+      activeService: product-service-blue # The stable service (blue)
+      previewService: product-service-green # The new version (green)
+      autoPromotionEnabled: true # Automatic promotion after health checks
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      serviceAccountName: moon-insurance # Use the KSA you created
+      containers:
+        - name: product-service
+          image: us-central1-docker.pkg.dev/moon-insurance/moon-insurance/product-service:latest
+          ports:
+            - containerPort: 5002
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: product-service-db-secret
+                  key: DATABASE_URL
