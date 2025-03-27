@@ -4,7 +4,11 @@ metadata:
   name: product-service-migrations
 spec:
   template:
+    metadata:
+      labels:
+        job-name: product-service-migrations
     spec:
+      restartPolicy: Never # Required for Jobs
       containers:
         - name: migrate-db
           image: us-central1-docker.pkg.dev/moon-insurance/moon-insurance/product-service:latest
@@ -17,4 +21,3 @@ spec:
                 secretKeyRef:
                   name: product-service-db-secret
                   key: DATABASE_URL
-      restartPolicy: Never
