@@ -14,13 +14,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Authentication with PAT
-        run: |
-          echo "${{ secrets.REUSABLE_WORKFLOW_TOKEN }}" > /tmp/token
-          git config --global credential.helper "store --file=/tmp/token"
-
       - name: Trigger Reusable Workflow from Another Repo
         uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yml@main
         with:
           service_name: "product-service"
           aggregator_service: false # Aggregator service flag
+        secrets:
+          REUSABLE_WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # Pass the PAT
