@@ -14,4 +14,4 @@ jobs:
       service_name: "product-service"
       aggregator_service: false # Aggregator service flag
     secrets:
-      REUSABLE_WORKFLOW_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # Token to trigger the reusable workflowß
+      GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }} # Token to trigger the reusable workflowß
