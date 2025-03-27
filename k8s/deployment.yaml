@@ -17,7 +17,7 @@ spec:
       labels:
         app: product-service
     spec:
-      serviceAccountName: moon-insurance # Use the KSA you.
+      serviceAccountName: moon-insurance # Use the KSA you created
       containers:
         - name: product-service
           image: us-central1-docker.pkg.dev/moon-insurance/moon-insurance/product-service:latest
