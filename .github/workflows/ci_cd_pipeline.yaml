@@ -9,7 +9,7 @@ on:
 
 jobs:
   call-pipeline:
-    uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yaml@main
+    uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yaml@main # Path to the reusable workflow
     with:
       service_name: "product-service"
       aggregator_service: false # Aggregator service flag
