@@ -1,4 +1,4 @@
-name: CI/CD for Product Service
+name: CI/CD for Product Service # Name of the pipeline
 
 on:
   push:
