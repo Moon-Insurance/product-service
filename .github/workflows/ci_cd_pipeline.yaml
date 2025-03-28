@@ -11,7 +11,7 @@ jobs:
   call-pipeline:
     uses: Moon-Insurance/main-service/.github/workflows/ci_c_pipeline.yaml@main # Path to the reusable workflow
     with:
-      service_name: "product-service" # service name of microservice
+      service_name: "product-service"
       aggregator_service: false # Aggregator service flag
     secrets:
       GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }} # GCP service account key
