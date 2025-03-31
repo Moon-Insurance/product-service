@@ -15,7 +15,7 @@ from app import app, db, Product
 def test_client():
     """Fixture to set up a clean test database and provide a test client."""
     app.config['TESTING'] = True
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL',"sqlite:///:memory:" )  # Use local DB
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:" # Use local DB
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {
         'poolclass': NullPool  # Disable pooling, ensuring a single connection
