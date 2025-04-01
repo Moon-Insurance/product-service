@@ -14,7 +14,6 @@ spec:
         app: product-service
         version: green
     spec:
-      serviceAccountName: moon-insurance # Use the KSA you created
       containers:
         - name: product-service
           image: us-central1-docker.pkg.dev/moon-insurance/moon-insurance/product-service:latest
