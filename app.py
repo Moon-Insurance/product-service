@@ -23,8 +23,8 @@ class Product(db.Model):
     def as_dict(self):
         return {'product_id': self.product_id, 'name': self.name, 'description': self.description}
 
-@app.before_first_request
-def create_tables():
+# Create database tables
+with app.app_context():
     db.create_all()
 
 # CREATE

@@ -3,14 +3,24 @@ kind: CronJob
 metadata:
   name: integration-test-product-service
 spec:
-  schedule: "0 0 * * *" # Adjust to your desired schedule
+  schedule:
+    "0 * * * *" # Run every hour (at the start of the hour)
+    # Keep only the most recent successful and failed jobs
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  # Prevent concurrent runs if the previous one hasn't finished yet
+  concurrencyPolicy: Forbid
+
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 600 # Keep pod for 10 min after completion
       template:
         spec:
+          restartPolicy: Never
           containers:
             - name: integration-test-product-service
               image: us-central1-docker.pkg.dev/moon-insurance/moon-insurance/product-service:latest
+              imagePullPolicy: IfNotPresent #avoids unnecessary pulls if the image is already present on the node.
               command: ["pytest", "tests/integration-test.py"]
               resources:
                 requests:
@@ -20,9 +30,8 @@ spec:
                   cpu: "500m"
                   memory: "256Mi"
               env:
-                - name: DATABASE_URL
+                - name: BASE_URL
                   valueFrom:
                     secretKeyRef:
-                      name: product-service-db-secret
-                      key: DATABASE_URL
-          restartPolicy: OnFailure
+                      name: product-service-url-secret
+                      key: BASE_URL

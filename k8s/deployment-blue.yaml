@@ -19,7 +19,7 @@ spec:
         - name: product-service
           image: us-central1-docker.pkg.dev/moon-insurance/moon-insurance/product-service:latest
           ports:
-            - containerPort: 5002
+            - containerPort: 5005
           resources:
             requests:
               cpu: "250m"
